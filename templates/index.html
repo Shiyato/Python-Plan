@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+{% block title %}Python Plan{% endblock %}
+{% block nav_i_1 %}
+nav-active
+{% endblock %}
+{% block nav_i_2 %}
+nav-unactive
+{% endblock %}
+{% block nav_i_3 %}
+nav-unactive
+{% endblock %}
+{% block main %}
+<div class="main-top-container">
+    {% if not user.is_authenticated %}
+     Для того чтобы отмечать свои результаты и следить за прогрессом нужно <a class="intext-link" href="/register">зарегистрироваться</a>,
+    или <a class="intext-link" href="/login">войти</a> если вы уже регистрировались ранее
+    {% else %}
+        <div class="progress-container">
+            <div class="progress-label">Прогресс:</div>
+            <div class="progress-counter">0%</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+<img class="devide-line" src="../static/Index-Rectangle_4.png">
+<form class="plan" method="POST" action="#" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {% for id in range(27)%}
+        {% set checkbox_text = form.labels_container.get('ru' + str(id + 1)) %}
+        {% if user.is_authenticated  %}
+            {% if id + 1 in checked_items %}
+                {% if checkbox_text[1] == 's' %}
+                    <input class="sub-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" value="y" onClick="checkItemsSub(this)" checked>
+                    {% if id == 27 %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    {% if id == 0 or id == 23 %}
+                        <div class="plan-block">
+                    {% else %}
+                        </div><div class="plan-block">
+                    {% endif %}
+                    <input class="main-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" value="y" onClick="checkItemsMain(this)" checked>
+                {% endif %}
+                <label class="checkbox-label" for="pf{{id + 1}}">{{checkbox_text[3:]}}</label>
+            {% else %}
+                {% if checkbox_text[1] == 's' %}
+                    <input class="sub-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" value="y" onClick="checkItemsSub(this)">
+                    {% if id == 27 %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    {% if id == 0 or id == 23 %}
+                        <div class="plan-block">
+                    {% else %}
+                        </div><div class="plan-block">
+                    {% endif %}
+                    <input class="main-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" value="y" onClick="checkItemsMain(this)">
+                {% endif %}
+                <label class="checkbox-label" for="pf{{id + 1}}">{{checkbox_text[3:]}}</label>
+            {% endif %}
+        {% else %}
+            {% if checkbox_text[1] == 's' %}
+                <input class="sub-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" disabled>
+                {% if id == 27 %}
+                    </div>
+                {% endif %}
+            {% else %}
+                {% if id == 0 or id == 23 %}
+                    <div class="plan-block">
+                {% else %}
+                    </div><div class="plan-block">
+                {% endif %}
+                <input class="main-checkbox" id="pf{{id + 1}}" name="pf{{id + 1}}" type="checkbox" disabled>
+            {% endif %}
+            <label class="checkbox-label" for="pf{{id + 1}}">{{checkbox_text[3:]}}</label>
+        {% endif %}
+    {% endfor %}
+    {% if user.is_authenticated %}
+        {{form.submit(class="submit-field", value="Сохранить")}}
+        <a class="content-link logout-link" href="/logout" style="font-weight: 300; text-align: center;">Выйти из профиля</a>
+    {% endif %}
+</form>
+{% endblock %}
+{% block script %}
+    function setNav() {
+        var navButtons = document.querySelectorAll('nav a > div');
+        navButtons[0].classList.add('nav-active');
+        navButtons[1].classList.add('nav-unactive');
+        navButtons[2].classList.add('nav-unactive');
+    }
+
+    function checkItemsMain(elem) {
+        var itemsContainer = elem.parentNode;
+        var children = itemsContainer.childNodes;
+
+        for (let i = 1; i < children.length; i++) {
+            if (children[i].nodeName == 'INPUT') {
+                if (elem.checked) {
+                    children[i].checked=true;
+                } else {
+                    children[i].checked=false;
+                }
+            }
+        }
+        progressCheck();
+    }
+
+    function checkItemsSub(elem) {
+        var itemsContainer = elem.parentNode;
+        var children = itemsContainer.childNodes;
+        var counter = 0;
+
+        for (let i = 1; i < children.length; i++) {
+            if (children[i].nodeName == 'INPUT' && children[i].className == 'sub-checkbox') {
+                if (children[i].checked == false) {
+                    counter++;
+                }
+            }
+        }
+        if (counter == 0) {
+            children[1].checked = true;
+        } else {
+            children[1].checked = false;
+        }
+        progressCheck();
+    }
+
+    function progressCheck() {
+        var progressCounter = document.querySelector('.progress-counter');
+        var progressBar = document.querySelector('.progress-bar');
+
+        var planPoints = document.querySelectorAll('.plan input[type="checkbox"]');
+        var counter = 0;
+        for (let i = 0; i < planPoints.length; i++) {
+            if (planPoints[i].checked) {
+                counter++;
+            }
+        }
+
+        percent = String(Math.round((counter / planPoints.length) * 100)) + '%';
+        progressBar.style.width = percent;
+        progressCounter.innerHTML = percent;
+    }
+
+    progressCheck();
+{% endblock %}

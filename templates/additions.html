@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block title %}Additions - Python Plan{% endblock %}
+{% block nav_i_1 %}
+nav-unactive
+{% endblock %}
+{% block nav_i_2 %}
+nav-unactive
+{% endblock %}
+{% block nav_i_3 %}
+nav-active
+{% endblock %}
+{% block main %}
+<div>
+    <h2 class="content-header">Популярные веб фреймворки:</h2>
+    <div class="content-text">
+        <a class="content-link" target="_blank" href="https://docs.djangoproject.com/en/3.2/">Django</a>
+        <a class="content-link" target="_blank" href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>
+        <a class="content-link" target="_blank" href="https://trypyramid.com/">Pyramid</a>
+        <a class="content-link" target="_blank" href="https://turbogears.org/">Turbo Gears</a>
+        <a class="content-link" target="_blank" href="https://www.bottlepy.org/docs/dev/index.html">Bottle</a>
+        <a class="content-link" target="_blank" href="https://cherrypydocrework.readthedocs.io/tutorials.html">CheryPy</a>
+        <a class="content-link" target="_blank" href="https://sanic.readthedocs.io/en/stable/index.html">Sanic</a>
+        <a class="content-link" target="_blank" href="https://www.tornadoweb.org/en/stable/">Tornado</a>
+        <a class="content-link" target="_blank" href="https://dash.plotly.com/">Dash</a>
+        <a class="content-link" target="_blank" href="https://pypi.org/project/hug/">Hug</a>
+        <a class="content-link" target="_blank" href="https://falcon.readthedocs.io/en/stable/index.html">Falcon</a>
+    </div>
+
+    <h2 class="content-header">Полезные модули:</h2>
+    <div class="content-text">
+        <a class="content-link" target="_blank" href="https://docs.python-requests.org/en/master/index.html">Requests</a>
+        <a class="content-link" target="_blank" href="https://docs.scrapy.org/en/latest/topics/request-response.html">Scrapy</a>
+        <a class="content-link" target="_blank" href="https://pillow.readthedocs.io/en/stable/">Pillow</a>
+        <a class="content-link" target="_blank" href="https://docs.ces.cisco.com/docs/asyncos-140">Asyncio</a>
+        <a class="content-link" target="_blank" href="https://tkdocs.com/shipman/">Tkinter</a>
+        <a class="content-link" target="_blank" href="https://docs.aiohttp.org/en/stable/index.html">Aiohttp</a>
+        <a class="content-link" target="_blank" href="https://kivy.org/doc/stable/">Kivy</a>
+        <a class="content-link" target="_blank" href="https://docs.opencv.org/master/">OpenCV</a>
+        <a class="content-link" target="_blank" href="https://jmespath.org/tutorial.html">JmesPath</a>
+        <a class="content-link" target="_blank" href="https://simplejson.readthedocs.io/en/latest/">Simplejson</a>
+        <a class="content-link" target="_blank" href="https://pythonhosted.org/pyquery/">pyquery</a>
+        <a class="content-link" target="_blank" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a>
+        <a class="content-link" target="_blank" href="https://www.selenium.dev/documentation/">Selenium</a>
+    </div>
+
+    <h2 class="content-header">Популярные Data Sience библиотеки:</h2>
+    <div class="content-text">
+        <a class="content-link" target="_blank" href="https://jupyter.org/documentation">Jupyter</a>
+        <a class="content-link" target="_blank" href="https://pandas.pydata.org/pandas-docs/stable/index.html">Pandas</a>
+        <a class="content-link" target="_blank" href="https://www.mathworks.com/help/matlab/index.html?s_tid=CRUX_lftnav">Matlab</a>
+        <a class="content-link" target="_blank" href="https://numpy.org/doc/">NumPy</a>
+        <a class="content-link" target="_blank" href="http://scipy.github.io/devdocs/dev/">SciPyv</a>
+        <a class="content-link" target="_blank" href="https://matplotlib.org/">Matplotlib</a>
+        <a class="content-link" target="_blank" href="https://plotly.com/python/">Plotly</a>
+        <a class="content-link" target="_blank" href="https://seaborn.pydata.org/">Seaborn</a>
+        <a class="content-link" target="_blank" href="https://docs.bokeh.org/en/latest/index.html">Bokeh</a>
+        <a class="content-link" target="_blank" href="https://networkx.org/documentation/stable/tutorial.html">NetworkX</a>
+        <a class="content-link" target="_blank" href="https://docs.dask.org/en/latest/index.html">Dask</a>
+        <a class="content-link" target="_blank" href="https://docs.cython.org/en/latest/">Cython</a>
+    </div>
+
+    <h2 class="content-header">Популярные библиотеки для машинного обучения:</h2>
+    <div class="content-text">
+        <a class="content-link" target="_blank" href="https://pytorch.org/docs/stable/index.html">Pytorch</a>
+        <a class="content-link" target="_blank" href="https://keras.io/">Keras</a>
+        <a class="content-link" target="_blank" href="https://scikit-learn.org/stable/index.html">Scikit-learn</a>
+        <a class="content-link" target="_blank" href="https://www.tensorflow.org/api_docs?hl=ru">TensorFlow</a>
+        <a class="content-link" target="_blank" href="https://caffe.berkeleyvision.org/">Caffe</a>
+        <a class="content-link" target="_blank" href="https://support.shotgunsoftware.com/hc/en-us">Shogun</a>
+    </div>
+</div>
+
+{% endblock %}
+{% block script %}
+    function setNav() {
+        var navButtons = document.querySelectorAll('nav a > div');
+        navButtons[0].classList.add('nav-unactive');
+        navButtons[1].classList.add('nav-unactive');
+        navButtons[2].classList.add('nav-active');
+    }
+{% endblock %}

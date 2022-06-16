@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block title %}Регистрация - Python Plan{% endblock %}
+{% block nav_i_1 %}
+nav-unactive
+{% endblock %}
+{% block nav_i_2 %}
+nav-unactive
+{% endblock %}
+{% block nav_i_3 %}
+nav-unactive
+{% endblock %}
+{% block main %}
+<form class="auth-form" method="POST" action="#" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <h2 class="form-header">Регистрация</h2>
+    <div class="fields-container">
+        {{form.login(class="string-field", placeholder="Логин")}}
+        {{form.password(class="string-field", placeholder="Пароль")}}
+        <div class="form-message" >
+            {% if errors %}
+                {% if 4 in errors %}
+                    Пользователь с таким логином уже существует
+                {% elif 3 in errors %}
+                    Логин и пароль не должны содержать пробелов
+                {% elif 2 in errors %}
+                    Слишком маленький логин или пароль
+                {% elif 1 in errors %}
+                    Слишком маленький логин или пароль
+                {% endif %}
+            {% endif %}
+        </div>
+        {{form.submit(class="submit-field", value="Подтвердить")}}
+        <a class="content-link logout-link" href="/login" style="font-weight: 300; text-align: center;">У меня уже есть профиль</a>
+    </div>
+</form>
+{% endblock %}
+{% block script %}
+    page = document.querySelector('.page');
+    footer = document.querySelector('footer');
+    footer.setAttribute('style', 'position: fixed; bottom: 0px; width: ' + page.offsetWidth + 'px;');
+
+    function setNav() {
+        var navButtons = document.querySelectorAll('nav a > div');
+        navButtons[0].classList.add('nav-unactive');
+        navButtons[1].classList.add('nav-unactive');
+        navButtons[2].classList.add('nav-unactive');
+    }
+{% endblock %}

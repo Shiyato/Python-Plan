@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="page">
+        <head>
+            <div class="head-content-container">
+                <h1 class="main-header">
+                    <img class="icon" src="{{url_for('static', filename='favicon.png')}}">
+                    <div class="main-header-text">Python Plan</div>
+                </h1>
+                <nav>
+                    <a href="/">
+                        <div class="nav-item">План</div>
+                    </a>
+                    <a href="/education-materials">
+                        <div class="nav-item2">Учебные материалы</div>
+                    </a>
+                    <a href="/additions">
+                        <div class="nav-item">Дополнительно</div>
+                    </a>
+                </nav>
+            </div>
+        </head>
+        <main>
+            <div class="main-content-container">
+                {% block main %}
+
+                {% endblock %}
+            </div>
+        </main>
+        <footer>
+            <div class="foot-content-container">
+                <div class="foot-item">©python-plan.com</div>
+                <div class="foot-item">Контакты: </div>
+                <div class="foot-item">Сайт разработал <a class="intext-link" href="https://github.com/Shiyato" target="_blank">Shiyato</a></div>
+            </div>
+        </footer>
+    </div>
+    <script language="javascript">
+        var navBlock = document.querySelector('nav');
+
+        function setNav() {}
+
+        var navHtml1 = `
+            <a href="/">
+                <div class="nav-item">План</div>
+            </a>
+            <a href="/education-materials">
+                <div class="nav-item">Учебные материалы</div>
+            </a>
+            <a href="/additions">
+                <div class="nav-item">Дополнительно</div>
+            </a>
+            `;
+
+        var navHtml2 = `
+            <div class="mobile-nav-container">
+                <div class="nav-menu-btn" onClick="menuOn()">
+                    <img class="nav-menu-img" src="{{ url_for('static', filename='nav_menu.png') }}">
+                </div>
+            </div>
+            `;
+
+        var navHtml3 = `
+            <div class="mobile-nav-container">
+                <div class="nav-menu-btn nav-front">
+                    <a href="/">
+                        <div class="nav-item">План</div>
+                    </a>
+                    <a href="/education-materials">
+                        <div class="nav-item">Учебные материалы</div>
+                    </a>
+                    <a href="/additions">
+                        <div class="nav-item">Дополнительно</div>
+                    </a>
+                </div>
+                <div class="nav-menu-back" onClick="menuOff()">
+                </div>
+            </div>
+            `;
+
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || document.body.offsetWidth < 1440) {
+            navBlock.innerHTML = navHtml2;
+        } else {
+            navBlock.innerHTML = navHtml1;
+        }
+
+        setNav();
+
+        {% block script %}
+        {% endblock %}
+
+        function menuOn() {
+            navBlock.innerHTML = navHtml3;
+            setNav();
+        }
+
+        function menuOff() {
+            navBlock.innerHTML = navHtml2;
+            setNav();
+        }
+    </script>
+</body>
+</html>
